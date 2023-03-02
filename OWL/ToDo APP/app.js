@@ -1,5 +1,23 @@
 const { Component, mount, xml, useState} = owl;
-console.log('123')
+
+class Task extends Component {
+    static template = xml`
+        <li t-attf-style="background-color:#{props.task.color}" class="d-flex align-items-center justify-content-between border p-3 mb-2 rounded">
+            <div class="form-check form-switch fs-5">
+                <input class="form-check-input" type="checkbox" value="" t-att-id="props.task.id"/>
+                <label class="form-check-label" for="flexCheckDefault" t-att-for="props.task.id">
+                    <t t-esc="props.task.name"/>
+                </label>
+            </div>
+            <div>
+                <button class="btn btn-primary me-2"><i class="bi bi-pencil"></i></button>
+                <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+            </div>
+        </li>
+    `
+    static props = ["task"]
+}
+
 class Root extends Component {
     static template = xml`
         <div>
@@ -16,21 +34,12 @@ class Root extends Component {
 
         <ul class="d-flex flex-column mt-5 p-0">
             <t t-foreach="tasks" t-as="task" t-key="task.id">
-                <li t-attf-style="background-color:#{task.color}" class="d-flex align-items-center justify-content-between border p-3 mb-2 rounded">
-                    <div class="form-check form-switch fs-5">
-                        <input class="form-check-input" type="checkbox" value="" t-att-id="task.id"/>
-                        <label class="form-check-label" for="flexCheckDefault" t-att-for="task.id">
-                            <t t-esc="task.name"/>
-                        </label>
-                    </div>
-                    <div>
-                        <button class="btn btn-primary me-2"><i class="bi bi-pencil"></i></button>
-                        <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                    </div>
-                </li>
+                <Task task="task"/>
             </t>
         </ul>
     `
+
+    static components = {Task}
 
     setup() {
         this.state = useState({
@@ -42,15 +51,20 @@ class Root extends Component {
     }
 
     addTask() {
+        if (!this.state.name) {
+            alert("Please provide name of task.")
+            return
+        }
+        const id = Math.random().toString().substring(2, 12)
         this.tasks.push({
-            id: 1,
+            id: id,
             name: this.state.name,
             color: this.state.color,
             isCompleted: false,
         })
     
     let state = this.state;
-    this.state = {...state, name: "", color: "#FFF000"}    
+    this.state = {...state, name: "", color: "#FFF000"}
     }
 
     
