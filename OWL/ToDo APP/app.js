@@ -16,20 +16,31 @@ class Root extends Component {
     </div>
 
     <ul class="d-flex flex-column mt-5 p-0">
-        <li class="d-flex align-items-center justify-content-between border p-3 rounded mb-2">
-            <div class="form-check form-switch fs-5">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                <label class="form-check-label" for="flexCheckDefault">
-                Task 1
-                </label>
-            </div>
-            <div>
-                <button class="btn btn-primary me-2"><i class="bi bi-pencil"></i></button>
-                <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
-            </div>
-        </li>
+        <t t-foreach="tasks" t-as="task" t-key="task.id">
+            <li t-attf-style="background-color: #{task.color}" class="d-flex align-items-center justify-content-between border p-3 rounded mb-2">
+                <div class="form-check form-switch fs-5">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" t-att-id="task.id"/>
+                    <label class="form-check-label" t-att-for="task.id">
+                        <t t-esc="task.name"/>
+                    </label>
+                </div>
+                <div>
+                    <button class="btn btn-primary me-2"><i class="bi bi-pencil"></i></button>
+                    <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                </div>
+            </li>
+        </t>
+        
     </ul>
     `
+
+    setup() {
+        this.tasks = useState([
+            {id: 1, name: "Task 1", color: "#fff000", isCompleted: false},
+            {id: 2, name: "Task 2", color: "#fff000", isCompleted: false},
+            {id: 3, name: "Task 3", color: "#fff000", isCompleted: false},
+        ])
+    }
 }
 
 mount(Root, document.getElementById("root"))
