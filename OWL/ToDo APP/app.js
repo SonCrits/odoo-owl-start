@@ -34,21 +34,28 @@ class Root extends Component {
     </ul>
     `
 
+    // Initialize value of Component
     setup() {
+        // Initialize the task state
         this.state = useState({
             name: "",
             color: "#FFF000",
             isCompleted: false,
         })
+        // Initialize the tasks value
         this.tasks = useState([])
     }
 
+    // If this function is called, then create a task with id, name, color, isCompleted value
     addTask() {
+        // If name of task empty, then display alert discuss and return
+        // write a value to the task with the value entered by the user
+        // Reset value on view
         if (!this.state.name) {
             alert("Please provide name of task")
             return
         }
-
+        
         const id = Math.random().toString().substring(2, 12)
 
         this.tasks.push({
