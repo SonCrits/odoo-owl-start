@@ -4,8 +4,10 @@ class Task extends Component {
     static template = xml`
         <li t-attf-style="background-color: #{props.task.color}" class="d-flex align-items-center justify-content-between border p-3 rounded mb-2">
             <div class="form-check form-switch fs-5">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" t-att-id="props.task.id"/>
-                <label class="form-check-label" t-att-for="props.task.id">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" 
+                    t-att-id="props.task.id" t-att-checked="props.task.isCompleted" t-on-click="toggleTask"/>
+                <label class="form-check-label" t-att-for="props.task.id" t-attf-class="#{props.task.isCompleted ?
+                'text-decoration-line-through': ''}">
                     <t t-esc="props.task.name"/>
                 </label>
             </div>
@@ -17,6 +19,10 @@ class Task extends Component {
     `
 
     static props = ["task"]
+
+    toggleTask() {
+        this.props.task.isCompleted = !this.props.task.isCompleted
+    }
 }
 
 
@@ -76,7 +82,6 @@ class Root extends Component {
 
         let state = this.state
         this.state = {...state, name: "", color: "#FFF000"}
-        console.log(this.tasks)
     }
 }
 
