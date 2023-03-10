@@ -11,10 +11,10 @@ class Task extends Component {
             </div>
             <div t-if="!state.isEditing" class="form-check form-switch fs-5">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" 
-                    t-att-id="props.task.id" t-att-checked="props.task.isCompleted" t-on-click="toggleTask"/>
-                <label class="form-check-label" t-att-for="props.task.id" t-attf-class="#{props.task.isCompleted ?
+                    t-att-id="state.id" t-att-checked="state.isCompleted" t-on-click="toggleTask" t-model="state.isCompleted"/>
+                <label class="form-check-label" t-att-for="state.id" t-attf-class="#{state.isCompleted ?
                 'text-decoration-line-through': ''}">
-                    <t t-esc="props.task.name"/>
+                    <t t-esc="state.name"/>
                 </label>
             </div>
             <div>
@@ -38,7 +38,7 @@ class Task extends Component {
     }
 
     toggleTask() {
-        this.props.task.isCompleted = !this.props.task.isCompleted
+        this.state.isCompleted = !this.state.isCompleted
     }
 
     deleteTask() {
