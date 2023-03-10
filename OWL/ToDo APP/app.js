@@ -5,9 +5,9 @@ class Task extends Component {
         <li t-attf-style="background-color: #{props.task.color}" class="d-flex align-items-center 
             justify-content-between border p-3 rounded mb-2">
             <div t-if="state.isEditing" class="d-flex align-items-center flex-grow-1 me-2">
-                <input type="text" class="form-control me-2"/>
+                <input type="text" class="form-control me-2" t-model="state.name"/>
                 <input type="color" style="width: 60px" class="form-control-lg form-control-color border-0 bg-white m-0" 
-                    id="color" title="Choose your color"/>
+                    id="color" title="Choose your color" t-model="state.color"/>
             </div>
             <div t-if="!state.isEditing" class="form-check form-switch fs-5">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" 
@@ -29,7 +29,11 @@ class Task extends Component {
 
     setup() {
         this.state = useState({
-            isEditing: false
+            isEditing: false,
+            id: this.props.task.id,
+            name: this.props.task.name,
+            color: this.props.task.color,
+            isCompleted: this.props.task.isCompleted
         })
     }
 
@@ -47,6 +51,7 @@ class Task extends Component {
 
     saveTask() {
         this.state.isEditing = false
+        console.log(this.state)
     }
     
 }
