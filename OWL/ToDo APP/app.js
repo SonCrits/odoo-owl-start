@@ -5,7 +5,7 @@ class Task extends Component {
         <li t-attf-style="background-color: #{props.task.color}" class="d-flex align-items-center justify-content-between border p-3 rounded mb-2">
             <div class="form-check form-switch fs-5">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" t-att-id="props.task.id"
-                    t-on-click="toggleTask"/>
+                    t-on-click="toggleTask" t-att-checked="props.task.isCompleted"/>
                 <label class="form-check-label" for="flexCheckDefault" t-att-for="props.task.id"
                     t-attf-class="#{props.task.isCompleted ? 'text-decoration-line-through': ''}">
                     <t t-esc="props.task.name"/>
