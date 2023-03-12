@@ -32,11 +32,12 @@ class Root extends Component {
     `
 
     setup() {
-        this.tasks = useState([
-            {id: 1, name: "Task 1", color: "#FFF000", isCompleted: false},
-            {id: 2, name: "Task 2", color: "#FF0000", isCompleted: false},
-            {id: 3, name: "Task 3", color: "#FFF000", isCompleted: false},
-        ])
+        this.state = useState({
+            name: "",
+            color: "#FFF000",
+            isCompleted: false
+        })
+        this.tasks = useState([])
     }
 }
 
