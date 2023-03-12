@@ -5,10 +5,11 @@ class Root extends Component {
     <div>
         <div class="input-group-lg mb-3 d-flex border w-100 rounded align-items-center">
             <input type="text" class="form-control-lg flex-fill border-0 me-1" placeholder="Add your new task" 
-                aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                aria-label="Recipient's username" aria-describedby="button-addon2" t-model="state.name"
+                t-att-value="state.name"/>
             <input type="color" class="form-control-lg form-control-color border-0 bg-white" id="color" value="#563d7c" 
-                title="Choose your color"/>
-            <button class="btn btn-primary" type="button" id="button-addon2">
+                title="Choose your color" t-model="state.color" t-att-value="state.color"/>
+            <button class="btn btn-primary" type="button" id="button-addon2" t-on-click="addTask">
                 <i class="bi bi-plus-circle-fill fs-3"></i>
             </button>
         </div>
@@ -32,11 +33,24 @@ class Root extends Component {
     `
 
     setup() {
-        this.tasks = useState([
-            {id: 1, name: "Task 1", color: "#FFF000", isCompleted: false},
-            {id: 2, name: "Task 2", color: "#FF0000", isCompleted: false},
-            {id: 3, name: "Task 3", color: "#FFF000", isCompleted: false},
-        ])
+        this.state = useState({
+            name: "",
+            color: "#FFF000",
+            isCompleted: false
+        })
+        this.tasks = useState([])
+    }
+
+    addTask() {
+        this.tasks.push({
+            id: 1,
+            name: this.state.name,
+            color: this.state.color,
+            isCompleted: this.state.isCompleted
+        })
+
+        let state = this.state
+        this.state = {...state, name: "", color: "#FFF000"}
     }
 }
 
