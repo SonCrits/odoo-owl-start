@@ -42,8 +42,13 @@ class Root extends Component {
     }
 
     addTask() {
+        if (!this.state.name) {
+            alert("Please provide name of task")
+            return
+        }
+        const id = Math.random().toString().substring(2, 12)
         this.tasks.push({
-            id: 1,
+            id: id,
             name: this.state.name,
             color: this.state.color,
             isCompleted: this.state.isCompleted
