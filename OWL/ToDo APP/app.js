@@ -37,7 +37,7 @@ class Task extends Component {
     }
 
     toggleTask() {
-        this.props.task.isCompleted = !this.props.task.isCompleted
+        this.state.isCompleted = !this.state.isCompleted
     }
 
     deleteTask() {
