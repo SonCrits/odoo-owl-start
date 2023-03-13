@@ -24,7 +24,7 @@ class Task extends Component {
         </li>
     `
 
-    static props = ["task", "onDelete", "onEdit"]
+    static props = ["task", "onDelete"]
 
     setup() {
         this.state = useState({
@@ -50,7 +50,6 @@ class Task extends Component {
 
     saveTask() {
         this.state.isEditing = false
-        this.props.onEdit(this.state)
     }
 }
 
@@ -70,7 +69,7 @@ class Root extends Component {
     </div>
     <ul class="d-flex flex-column mt-5 p-0">
         <t t-foreach="tasks" t-as="task" t-key="task.id">
-            <Task task="task" onDelete.bind="deleteTask" onEdit.bind="editTask"/>
+            <Task task="task" onDelete.bind="deleteTask"/>
         </t>
     </ul>
     `
@@ -106,11 +105,6 @@ class Root extends Component {
     deleteTask(task) {
         const index = this.tasks.findIndex(t => t.id == task.id)
         this.tasks.splice(index, 1)
-    }
-
-    editTask(task) {
-        const index = this.tasks.findIndex(t => t.id == task.id)
-        this.tasks.splice(index, 1, task)
     }
 }
 
