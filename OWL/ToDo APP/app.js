@@ -4,16 +4,16 @@ class Task extends Component {
     static template = xml`
         <li t-attf-style="background-color: #{props.task.color}" class="d-flex align-items-center justify-content-between border p-3 rounded mb-2">
             <div t-if="state.isEditing" class="d-flex align-items-center flex-grow-1 me-2">
-                <input type="text" class="form-control me-2"/>
+                <input type="text" class="form-control me-2" t-model="state.name"/>
                 <input type="color" style="width: 60px" class="form-control-lg form-control-color border-0 bg-white m-0" id="color" 
-                    title="Choose your color"/>
+                    title="Choose your color" t-model="state.color"/>
             </div>
             <div t-if="!state.isEditing" class="form-check form-switch fs-5">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" t-att-id="props.task.id"
-                    t-on-click="toggleTask" t-att-checked="props.task.isCompleted"/>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" t-att-id="state.id"
+                    t-on-click="toggleTask" t-att-checked="state.isCompleted"/>
                 <label class="form-check-label" for="flexCheckDefault" t-att-for="props.task.id"
-                    t-attf-class="#{props.task.isCompleted ? 'text-decoration-line-through': ''}">
-                    <t t-esc="props.task.name"/>
+                    t-attf-class="#{state.isCompleted ? 'text-decoration-line-through': ''}">
+                    <t t-esc="state.name"/>
                 </label>
             </div>
             <div>
@@ -28,13 +28,16 @@ class Task extends Component {
 
     setup() {
         this.state = useState({
+            id: this.props.task.id,
+            name: this.props.task.name,
+            color: this.props.task.color,
+            isCompleted: this.props.task.isCompleted,
             isEditing : false
         })
     }
 
     toggleTask() {
         this.props.task.isCompleted = !this.props.task.isCompleted
-        console.log(this.props.task.isCompleted)
     }
 
     deleteTask() {
