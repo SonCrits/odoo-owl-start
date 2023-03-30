@@ -1,17 +1,32 @@
 const { Component, xml, mount} = owl;
 
-// Owl Components
+// ==================================================
+// Task Component
+// ==================================================
+
+class Task extends Component {
+    static template = xml /* xml */`
+        <div class="task" t-att-class="props.task.isCompleted ? 'done' : '' ">
+            <input type="checkbox" t-att-checked="props.task.isCompleted"/>
+            <span><t t-esc="props.task.text"/></span>
+        </div>
+    `;
+
+    static props = ["task"];
+}
+// ==================================================
+// Root Components
+// ==================================================
 class Root extends Component {
-    static template = xml/* xml */`
+    static template = xml /* xml */`
         <div class="task-list">
             <t t-foreach="tasks" t-as="task" t-key="task.id">
-                <div class="task" t-att-class="task.isCompleted ? 'done' : '' ">
-                    <input type="checkbox" t-att-checked="task.isCompleted"/>
-                    <span><t t-esc="task.text"/></span>
-                </div>
+                <Task task="task"/>
             </t>
         </div>
     `;
+
+    static components = {Task};
 
     tasks = [
         {
@@ -24,7 +39,11 @@ class Root extends Component {
             text: "Learning Data structures and Algorithms",
             isCompleted: true
         }
-    ]
+    ];
 } 
 
-mount(Root, document.body);
+// ====================================================
+// Setup
+// ====================================================
+
+mount(Root, document.body, {dev: true});
