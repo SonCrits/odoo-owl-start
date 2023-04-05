@@ -1,4 +1,4 @@
-const { Component, xml, mount, useRef, onMounted} = owl;
+const { Component, xml, mount, useRef, onMounted, useState} = owl;
 
 // ==================================================
 // Task Component
@@ -31,26 +31,25 @@ class Root extends Component {
 
     static components = {Task};
 
-    tasks = [
-        {
-            id: 1,
-            text: "Learning Owl",
-            isCompleted: true
-        },
-        {
-            id: 2,
-            text: "Learning Data structures and Algorithms",
-            isCompleted: true
-        }
-    ];
+    // Khi nhập tên task sau đó enter từ `input`, luồng hoạt động trong hàm `addTask` vẫn thực hiện
+    // Tuy nhiên do owl không hiểu cần kết xuất dữ liệu cho người dùng (interface)
+    // Sử dụng `useState` làm cho các tác vụ hoạt động trở lại
+    nextId = 1;
+    tasks = useState([]);
 
     addTask(ev) {
         // 13 is keycode for Enter
         if (ev.keyCode === 13) {
             const text = ev.target.value.trim();
             ev.target.value = "";
-            console.log('add task', text)
-            // todo
+            if (text){
+                const newTask = {
+                    id: this.nextId++,
+                    text: text,
+                    isCompleted: false,
+                };
+                this.tasks.push(newTask);
+            }       
         }
     }
 
