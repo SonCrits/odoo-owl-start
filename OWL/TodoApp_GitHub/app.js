@@ -7,12 +7,16 @@ const { Component, xml, mount, useRef, onMounted, useState} = owl;
 class Task extends Component {
     static template = xml /* xml */`
         <div class="task" t-att-class="props.task.isCompleted ? 'done' : '' ">
-            <input type="checkbox" t-att-checked="props.task.isCompleted"/>
+            <input type="checkbox" t-att-checked="props.task.isCompleted" t-on-click="toggleTask"/>
             <span><t t-esc="props.task.text"/></span>
         </div>
     `;
 
     static props = ["task"];
+
+    toggleTask() {
+        this.props.task.isCompleted = !this.props.task.isCompleted;
+    }
 }
 // ==================================================
 // Root Components
