@@ -1,0 +1,8 @@
+<template xml:space="preserve">
+    <t t-name="todo_list_app.TodoList" owl="1">
+        <div>
+            <h2>Owl Todo List</h2>
+            <p t-esc="state.value"/>
+        </div>
+    </t>
+</template>

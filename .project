@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>16.8-odoo-owl-start</name>
+	<comment></comment>
+	<projects>
+		<project>16.0-odoo</project>
+		<project>16.1-tvtmaaddons</project>
+		<project>16.2-erponline-enterprise</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.python.pydev.PyDevBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.python.pydev.pythonNature</nature>
+	</natures>
+</projectDescription>

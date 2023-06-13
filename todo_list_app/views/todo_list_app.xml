@@ -1,0 +1,60 @@
+<odoo>
+	<record id="todo_list_app_view_tree" model="ir.ui.view">
+		<field name="name">todo.list.app.view.tree</field>
+		<field name="model">todo.list.app</field>
+		<field name="arch" type="xml">
+			<tree string="Todo App Tree">
+				<field name="name"/>
+				<field name="is_completed"/>
+				<field name="color" widget="color"/>
+			</tree>
+		</field>
+	</record>
+	
+	<record id="todo_list_app_view_form" model="ir.ui.view">
+		<field name="name">todo.list.view.form</field>
+		<field name="model">todo.list.app</field>
+		<field name="arch" type="xml">
+			<form string="Todo App Form">
+				<sheet>
+					<group>
+						<field name="name"/>
+						<field name="is_completed"/>
+						<field name="color" widget="color" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<record id="todo_list_app_action" model="ir.actions.act_window">
+		<field name="name">Todo App</field>
+		<field name="res_model">todo.list.app</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<record id="action_todo_list_js" model="ir.actions.client">
+		<field name="name">Todo List OWL</field>
+		<field name="tag">todo_list_app.action_todo_list_js</field>
+	</record>
+
+	<menuitem
+		id="todo_list_app_menu_root"
+		name="Todo-App"
+		sequence="10"/>
+
+	<menuitem
+		id="todo_list_app_menu"
+		name="Todo-App-List"
+		action="todo_list_app_action"
+		parent="todo_list_app_menu_root"
+		sequence="10"/>
+
+	<menuitem
+		id="todo_list_app_menu_js"
+		name="Todo List Owl"
+		action="action_todo_list_js"
+		parent="todo_list_app_menu_root"
+		sequence="11"/>
+	
+</odoo>
