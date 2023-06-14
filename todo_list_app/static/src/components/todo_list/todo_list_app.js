@@ -8,7 +8,7 @@ export class TodoListApp extends Component {
         this.state = useState({
             taskList: [
                 {id: 1, name: "Task 1", color: "#FF0000", completed: true},
-                {id: 2, name: "Task 2", color: "#000000", completed: true},
+                {id: 2, name: "Task 2", color: "#000000", completed: false},
                 {id: 3, name: "Task 3", color: "#FFFFFF", completed: false},
             ]
         })
