@@ -42,7 +42,7 @@
                                         data-bs-target="#exampleModal">
                                         Edit
                                     </button>
-                                    <button class="btn btn-danger"> Delete </button>
+                                    <button class="btn btn-danger" t-on-click="() => this.deleteTask(task)"> Delete </button>
                                 </td>
                             </tr>
                         </tbody>
