@@ -48,6 +48,11 @@ export class TodoListApp extends Component {
         await this.getAllTask()
     }
 
+    async deleteTask(task) {
+        await this.orm.call(this.model, 'unlink', [task.id])
+        await this.getAllTask()
+    }
+
     resetForm() {
         this.state.task = {name: "", color: "#FF0000", completed: false};
     }
