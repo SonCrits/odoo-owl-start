@@ -27,7 +27,7 @@
                             <tr t-foreach="state.taskList" t-key="task.id" t-as="task">
                                 <td>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" t-att-checked="task.completed"/>
                                         <label class="form-check-label" for="flexCheckDefault">
                                             <span t-esc="task.name"></span>
                                         </label>
