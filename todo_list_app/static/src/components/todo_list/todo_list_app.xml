@@ -1,8 +1,17 @@
 <template xml:space="preserve">
     <t t-name="todo_list_app.TodoList" owl="1">
-        <div>
-            <h2>Owl Todo List</h2>
-            <p t-esc="state.value"/>
+        <div class="todo-list-container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <button class="btn btn-primary">New</button>
+                </div>
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search here..."/>
+                        <button class="btn btn-outline-primary">Search</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </t>
 </template>
