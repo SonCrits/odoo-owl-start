@@ -5,7 +5,7 @@
 		<field name="arch" type="xml">
 			<tree string="Todo App Tree">
 				<field name="name"/>
-				<field name="is_completed"/>
+				<field name="completed"/>
 				<field name="color" widget="color"/>
 			</tree>
 		</field>
@@ -19,7 +19,7 @@
 				<sheet>
 					<group>
 						<field name="name"/>
-						<field name="is_completed"/>
+						<field name="completed"/>
 						<field name="color" widget="color" />
 					</group>
 				</sheet>
