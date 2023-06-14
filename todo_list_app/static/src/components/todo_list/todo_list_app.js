@@ -1,7 +1,7 @@
 /** @odoo-module **/
 import { useService } from "@web/core/utils/hooks";
 import { registry } from '@web/core/registry';
-const { Component, useState, onWillStart } = owl;
+const { Component, useState, onWillStart, useRef } = owl;
 
 export class TodoListApp extends Component {
     setup() {
@@ -14,6 +14,7 @@ export class TodoListApp extends Component {
 
         this.orm = useService("orm")
         this.model = "todo.list.app"
+        this.searchInput = useRef("search-input")
 
         onWillStart(async ()=> {
             await this.getAllTask()
@@ -55,6 +56,16 @@ export class TodoListApp extends Component {
 
     resetForm() {
         this.state.task = {name: "", color: "#FF0000", completed: false};
+    }
+
+    async searchTask() {
+        const text = this.searchInput.el.value
+        this.state.taskList = await this.orm.searchRead(this.model, [['name','ilike',text]], ["name", "color", "completed"])
+    }
+
+    async toggleTask(e, task) {
+        await this.orm.call(this.model, 'write', [[task.id], {completed: e.target.checked}])
+        await this.getAllTask()
     }
 
 }

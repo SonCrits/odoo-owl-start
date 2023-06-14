@@ -7,8 +7,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search here..."/>
-                        <button class="btn btn-outline-primary">Search</button>
+                        <input type="text" class="form-control" placeholder="Search here..." t-ref="search-input" t-on-keyup="searchTask"/>
+                        <button class="btn btn-outline-primary" t-on-click="searchTask">Search</button>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                             <tr t-foreach="state.taskList" t-key="task.id" t-as="task">
                                 <td>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" t-att-id="task.id" t-att-checked="task.completed"/>
+                                        <input class="form-check-input" type="checkbox" value="" t-att-id="task.id" t-att-checked="task.completed" t-on-click="(e) => this.toggleTask(e, task)"/>
                                         <label class="form-check-label" t-att-for="task.id" t-attf-class="#{task.completed and 'text-decoration-line-through'}">
                                             <span t-esc="task.name"></span>
                                         </label>
