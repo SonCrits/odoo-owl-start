@@ -26,16 +26,30 @@ export class TodoListApp extends Component {
     }
 
     addTask() {
-
+        this.resetForm()
+        this.state.activeId = false;
+        this.state.isEdit = false;
     }
 
-    editTask() {
-
+    editTask(task) {
+        this.state.activeId = task.id;
+        this.state.isEdit = true;
+        this.state.task = {...task}
     }
 
     async saveTask() {
-        await this.orm.call(this.model, 'create', [this.state.task])
+        if (!this.state.isEdit) {
+            await this.orm.call(this.model, 'create', [this.state.task])
+            this.resetForm()
+        }
+        else {
+            await this.orm.call(this.model, 'write', [[this.state.activeId], this.state.task])
+        }
         await this.getAllTask()
+    }
+
+    resetForm() {
+        this.state.task = {name: "", color: "#FF0000", completed: false};
     }
 
 }
