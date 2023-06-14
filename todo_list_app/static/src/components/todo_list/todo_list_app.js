@@ -6,7 +6,10 @@ const { Component, useState, onWillStart } = owl;
 export class TodoListApp extends Component {
     setup() {
         this.state = useState({
-            taskList: []
+            task: {name: "", color: "#FF0000", completed: false},
+            taskList: [],
+            isEdit: false,
+            activeId: false,
         })
 
         this.orm = useService("orm")
@@ -20,6 +23,19 @@ export class TodoListApp extends Component {
 
     async getAllTask() {
         this.state.taskList = await this.orm.call(this.model, 'search_read', [[], ["name", "color", "completed"]],)
+    }
+
+    addTask() {
+
+    }
+
+    editTask() {
+
+    }
+
+    async saveTask() {
+        await this.orm.call(this.model, 'create', [this.state.task])
+        await this.getAllTask()
     }
 
 }
