@@ -13,7 +13,7 @@
                 </div>
             </div>
 
-            <div class="row m-2">
+            <div class="row m-2 mt-5">
                 <div class="col">
                     <table class="table table-striped table-hover border">
                         <thead>
@@ -24,12 +24,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr t-foreach="state.taskList" t-key="task.id" t-as="task">
                                 <td>
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            Default checkbox
+                                            <span t-esc="task.name"></span>
                                         </label>
                                     </div>
                                 </td>
