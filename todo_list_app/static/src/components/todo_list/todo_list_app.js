@@ -68,6 +68,11 @@ export class TodoListApp extends Component {
         await this.getAllTask()
     }
 
+    async updateColor(e, task) {
+        await this.orm.call(this.model, 'write', [[task.id], {color: e.target.value}])
+        await this.getAllTask()
+    }
+
 }
 
 TodoListApp.template = "todo_list_app.TodoList"

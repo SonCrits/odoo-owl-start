@@ -34,7 +34,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="color" class="form-control form-control-color" id="exampleColorInput" t-att-value="task.color" title="Choose your color" />
+                                    <input type="color" class="form-control form-control-color" id="exampleColorInput" t-att-value="task.color" title="Choose your color" t-on-change="(e) => this.updateColor(e, task)" />
                                 </td>
                                 <td>
                                     <button class="btn btn-success me-2" t-on-click="() => this.editTask(task)"
