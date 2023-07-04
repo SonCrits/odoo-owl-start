@@ -9,6 +9,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/todo_list_app.xml',
+        'views/res_partner.xml',
     ],
     'assets': {
         'web.assets_backend': [
